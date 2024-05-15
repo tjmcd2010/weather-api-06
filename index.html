@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "assets/css/style.css">
+
     <title>Document</title>
+
     
 </head>
 <body>
-<header><h1>Search for Weather Forecasts!</h1>
-    <p>...from JSON data</p>
-</header>
-<main>
-    <div id = "myData"> </div>
-</main>
 
-    
+<form class = "weatherForm">
+    <input type = "text" class = "cityInput" placeholder = "Enter City Name">
+    <button type = "submit"> Get Weather </button>
+</form>
+
+<div class = "card" style = "display:none"></div>
+<div class = "forecast" id = "forecast" ></div>    
+<div id = "button-container">  </div>
+
+<aside class = "history" id="history">
+</aside> 
+
+
+      
 
 
   <script src = "assets/js/script.js"></script>
