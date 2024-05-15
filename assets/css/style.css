@@ -1,99 +1,71 @@
-*{
+/* styles the body of the page */
+body {
+    font-family: sans-serif;
+    background-color: lightgray;
     margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-}
-
-body{
-    background: #222;
-}
-
-.card{
-    width: 90%;
-    max-width: 470px;
-    background: linear-gradient(135deg, #00feba, #5b548a);
-    color: #fff;
-    margin: 100px auto 0;
-    border-radius: 20px;
-    padding: 40px 35px;
-    text-align: center;
-}
-
-.search{
-    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
 
-.search input{
-    border: 0;
-    outline: 0;
-    background: #ebfffc;
-    color: #555;
-    padding: 10px 25px;
-    height: 60px;
-    border-radius: 30px;
-    flex: 1;
-    margin-right: 16px;
-    font-size: 18px;
+/* styles the city name */
+h1 {
+    font-size: 2rem;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    }
+    /*styling for the weather data */
+p {
+    font-size: 1.5rem;
+    margin: 5px, 0px;
 }
-
-.search button{
-    border: 0;
-    outline: 0;
-    background: #ebfffc;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
+/*styles the card that holds the weather data */
+.card {
+    background: linear-gradient(180deg, rgb(112, 170, 229), rgb(235, 181, 80) );
+    padding: 50px;
+    box-shadow: 2px 2px 5px hsla(0,0%, 0%, 0.5);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* styles the entire search section */
+.weatherform {
+    margin: 20px;
+    }
+/* styling the text input box */
+.cityInput {
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 2px solid hsla(0,0%, 20%, 0.3);
+    border-radius: 10px;
+    margin: 10px;
+    width: 300px;
+}
+/* styles the get weather button */
+button[type = "submit"] {
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: lightgreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
-
-.search button img{
-    width: 16px;
+/* slightly chages the color of the button upon hovering */
+button[type="submit"]:hover {
+    background-color: rgb(168, 239, 168);
 }
+/* sets all of the text to bold for the all of the weather data, except the emoji */
+.tempDisplay, .humidityDisplay, .descriptionDisplay, .errorDisplay {
+    font-weight: bold;
+    margin: 0
 
-.weather-icon{
-    width: 170px;
-    margin-top: 30px;
 }
-
-.weather h1{
-    font-size: 80px;
-    font-weight: 500;
-}
-
-.weather h2{
-    font-size: 45px;
-    font-weight: 400;
-    margin-top: -10px;
-}
-
-.details{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    margin-top: 50px;
-}
-
-.col{
-    display: flex;
-    align-items: center;
-    text-align: left;
-}
-
-.col img{
-    width: 40px;
-    margin-right: 10px;
-}
-
-.humidity, .wind{
-    font-size: 28px;
-    margin-top: -6px;
-}
-
-.weather{
-    display: none;
-}
+/*updates the margin and size of the emoji */
+.emojiDisplay {
+    font-size: 6rem;
+    margin: 0;
+   }
