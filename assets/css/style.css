@@ -1,11 +1,16 @@
+
+* {
+    box-sizing: border-box;
+}
 /* styles the body of the page */
 body {
-    font-family: sans-serif;
-    background-color: lightgray;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+/* sytles the header */
+header {
+    background-color: rgb(213, 212, 198);
+    text-align: center;
+    padding: 5px;
 }
 
 /* styles the city name */
@@ -23,15 +28,18 @@ p {
 .card {
     background: linear-gradient(180deg, rgb(112, 170, 229), rgb(235, 181, 80) );
     padding: 50px;
-    box-shadow: 2px 2px 5px hsla(0,0%, 0%, 0.5);
+    box-shadow: 2px 2px 5px hsla (black)
     min-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-transform: capitalize;
+    bord
 }
 /* styles the entire search section */
 .weatherform {
     margin: 20px;
+    float: left;
     }
 /* styling the text input box */
 .cityInput {
@@ -42,13 +50,14 @@ p {
     border-radius: 10px;
     margin: 10px;
     width: 300px;
+    text-transform: capitalize;
 }
 /* styles the get weather button */
 button[type = "submit"] {
     padding: 10px 20px;
     font-weight: bold;
     font-size: 2rem;
-    background-color: lightgreen;
+    background-color: rgb(183, 157, 227);
     color: white;
     border: none;
     border-radius: 5px;
@@ -69,3 +78,18 @@ button[type="submit"]:hover {
     font-size: 6rem;
     margin: 0;
    }
+button-container {
+    font-size: 2rem;
+
+}
+aside {
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+section {
+    width: 40%;
+    float: left;
+    padding: 5px;
+    
+}
