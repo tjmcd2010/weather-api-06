@@ -12,7 +12,14 @@ header {
     text-align: center;
     padding: 5px;
 }
-
+.history-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.history-container :hover {
+    cursor: pointer;
+}
 /* styles the city name */
 h1 {
     font-size: 2rem;
@@ -28,19 +35,21 @@ p {
 .card {
     background: linear-gradient(180deg, rgb(112, 170, 229), rgb(235, 181, 80) );
     padding: 50px;
-    box-shadow: 2px 2px 5px hsla (black)
+    box-shadow: 2px 2px 5px hsla (black);
     min-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-transform: capitalize;
-    bord
+    
 }
 /* styles the entire search section */
-.weatherform {
-    margin: 20px;
-    float: left;
-    }
+
+.weatherForm {
+    margin: 5px;
+    text-align: center;
+}
+
 /* styling the text input box */
 .cityInput {
     padding: 10px;
