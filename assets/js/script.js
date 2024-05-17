@@ -6,6 +6,7 @@ const card = document.querySelector(".card");
 const apiKey = "7c1a37dcc8617ef1fe4650e273af97ce";
 let history = window.localStorage.getItem("history");
 let historyButtons = "";
+let buttonContainer = ""
 
 //gets weather information and sends an error if city is not found.
 async function getWeatherData(city) {
@@ -90,54 +91,44 @@ function displayWeather (data) {
       console.log('City already in history, not adding');
     }
   }
-  window.addEventListener("load", () => {
-    const historyButtons = document.querySelector("#history-buttons");
-    if (!historyButtons) return; // Check if the element is not null
-  });
+  // Get the history data from local storage
+const historyData = JSON.parse(localStorage.getItem("history"));
 
-  document.addEventListener("DOMContentLoaded", () => {
-    let history = JSON.parse(localStorage.getItem("history")) || [];
-    const historyButtons = document.querySelector("history-buttons");
-    if (!historyButtons) return; // Check if the element is not null
-    historyButtons.innerHTML = "";
-    history.forEach(search => {
-      const button = document.createElement("button");
-      button.textContent = search;
-      button.addEventListener("click", () => {
-        getWeatherData(search);
-      });
-      historyButtons.appendChild(button);
+// Check if there is any history data
+if (historyData) {
+  // Get the container element where the history buttons will be added
+  const historyContainer = document.getElementById("history-container");
+
+  // Loop through the history data and create a button for each item
+  historyData.forEach(item => {
+    // Create a new button element
+    const historyButton = document.createElement("button");
+    historyButton.textContent = item;
+    historyButton.classList.add("history-button");
+
+    // Add a click event listener to the button
+    historyButton.addEventListener("click", async () => {
+      try {
+        // Call the getWeatherData function with the city from the button
+        const weatherData = await getWeatherData(item);
+        displayWeather(weatherData);
+      } catch (error) {
+        console.error(error);
+        displayError("Error fetching weather data. Please try again.");
+      }
     });
+
+    // Append the button to the history container
+    historyContainer.appendChild(historyButton);
   });
+} else {
+  // If there is no history data, you could display a message or do something else
+  console.log("No history data found in local storage.");
+}
+
   /**
    * This function creates history buttons based on the cities stored in the browser's local storage.
    */
-  function createHistoryButtons() {
-    // Create a new element called 'historyButtons' and add the class 'historyButtons' to it
-   
-    
-
-    // Retrieve the list of cities from the browser's local storage or create an empty array if it doesn't exist
-    let history = JSON.parse(localStorage.getItem("history")) || [];
-
-    // Iterate over each city in the list
-    history.forEach(city => {
-      // Create a new button element and set its text content to the city name
-      const button = document.createElement("button");
-      button.textContent = city;
-
-      // Add an event listener to the button that calls the 'getWeatherData' function with the city as the argument
-      button.addEventListener("click", () => {
-        getWeatherData(city);
-      });
-
-      // Append the button to the 'historyButtons' element
-      historyButtons.appendChild(button);
-    });
-
-    // Append the 'historyButtons' element to the 'card' element
-    card.appendChild(historyButtons);
-  }
   
  
   
