@@ -10,19 +10,22 @@
 <body>
     <header>
     <h2>Show Me the Weather!</h2>
+    <form class = "weatherForm">
+        <input type = "text" class = "cityInput" placeholder = "Enter City Name">
+        <button type = "submit"> Get Weather </button>
 </header>
 <main>
     <aside>
         <div class = "history-container" id = "history-container">
             <p>Previous Searches</p>
     </aside>
-<section> 
-    <form class = "weatherForm">
-        <input type = "text" class = "cityInput" placeholder = "Enter City Name">
-        <button type = "submit"> Get Weather </button>
+
+    <div class = "weather-container" id = "weather-container">  
     <div class = "card" style = "display:none"></div>
-    <div class = "forecast" id = "forecast" ></div>    
-</section>
+    <br><h3> 5 day Forecast</h3>
+    <div class = "forecast-container col-md col-xl-10" id = "forecast-container" ></div>
+    </div>    
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
