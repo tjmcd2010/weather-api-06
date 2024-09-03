@@ -40,6 +40,9 @@ async function getForecastData(city) {
 }
 
 //declares the city value, displays the weather data and stores the city value to history/local storage
+//remove the previous city after clicking on get weather
+
+
 weatherForm.addEventListener("submit", async event => {
   event.preventDefault();
   const city = cityInput.value;
@@ -58,6 +61,8 @@ weatherForm.addEventListener("submit", async event => {
   } else {
     displayError("Please enter a valid city name.");
   }
+  //clear previous city after clicking on get weather
+  cityInput.value = "";
 });
 
 /**
@@ -102,8 +107,12 @@ if (historyData) {
 // Get the container element where the history buttons will be added
 const historyContainer = document.getElementById("history-container");
 
-// Loop through the history data and create a button for each item
-historyData.forEach(item => {
+// Loop through the history data and create a button for each item but only display
+//the most recently searched 10 cities
+
+
+
+historyData.slice(0, 10).forEach(item => {
   // Create a new button element
   const historyButton = document.createElement("button");
   historyButton.textContent = item;
@@ -112,32 +121,36 @@ historyData.forEach(item => {
   // Add a click event listener to the button
   historyButton.addEventListener("click", async () => {
     try {
-      // Call the getWeatherData function with the city from the button
+      // Call the getWeatherData function with the city from the button. 
+      //Also retrieve the forecast data when  the history button is clicked.
+      const forecastData = await getForecastData(item);
       const weatherData = await getWeatherData(item);
       displayWeather(weatherData);
+      displayForecast(forecastData);
     } catch (error) {
       console.error(error);
       displayError("Error fetching weather data. Please try again.");
     }
+    event.preventDefault();
   });
 
-  // Append the button to the history container and capitalize it
+  // Append the button to the history container and capitalize it without a refresh needed
+  
   historyButton.textContent = item.charAt(0).toUpperCase() + item.slice(1);
+
   historyContainer.appendChild(historyButton);
+  
 });
 } else {
 // If there is no history data, you could display a message or do something else
 console.log("No history data found in local storage.");
 }
 
-/**
- * This function creates history buttons based on the cities stored in the browser's local storage.
- */
-
 
 function displayWeather (data) {
   const {name: city,
         main: {temp, humidity},
+        wind: {speed},
         weather: [{description, id}]} = data;
    card.textContent = "";
    card.style.display = "flex";  
@@ -145,24 +158,28 @@ function displayWeather (data) {
    const cityDisplay = document.createElement("h1");
    const tempDisplay = document.createElement("p");
    const humidtyDisplay = document.createElement("p");
+   const windDisplay = document.createElement("p");
    const descriptionDisplay = document.createElement("p");
    const emojiDisplay = document.createElement("p");
 
    cityDisplay.textContent = city;
    tempDisplay.textContent = `${((temp - 273.15) * (9/5) + 32).toFixed(0)}°F`;
    humidtyDisplay.textContent = `Humidity: ${humidity}%`;
+   windDisplay.textContent = `Wind: ${data.wind.speed.toFixed(0)} mph`;
    descriptionDisplay.textContent = description;
    emojiDisplay.textContent = getEmoji(id);
 
    cityDisplay.classList.add("cityDisplay");
    tempDisplay.classList.add("tempDisplay");
    humidtyDisplay.classList.add("humidtyDisplay");
+   windDisplay.classList.add("windDisplay");
    descriptionDisplay.classList.add("descriptionDisplay");
    emojiDisplay.classList.add("emojiDisplay");
 
       card.appendChild(cityDisplay);
       card.appendChild(tempDisplay);
       card.appendChild(humidtyDisplay);
+      card.appendChild(windDisplay);
       card.appendChild(descriptionDisplay);
       card.appendChild(emojiDisplay);
       
@@ -176,7 +193,7 @@ function displayWeather (data) {
     forecastContainer.textContent = "";
   
     forecastData.forEach(day => {
-      const { main: { temp, humidity }, weather: [{ description, id }], dt_txt } = day;
+      const { main: { temp, humidity }, wind: { speed }, weather: [{ description, id }], dt_txt } = day;
   
       // Create a container for the day
       const dayContainer = document.createElement("div");
@@ -186,6 +203,7 @@ function displayWeather (data) {
       const dateDisplay = document.createElement("p");
       const tempDisplay = document.createElement("p");
       const humidityDisplay = document.createElement("p");
+      const windDisplay = document.createElement("p");
       const descriptionDisplay = document.createElement("p");
       const emojiDisplay = document.createElement("p");
       const date = new Date(dt_txt.replace(' ', 'T'));
@@ -195,6 +213,7 @@ function displayWeather (data) {
   
       tempDisplay.textContent = `${temp.toFixed(0)}°F`;
       humidityDisplay.textContent = `Humidity: ${humidity}%`;
+      windDisplay.textContent = `Wind: ${speed.toFixed(0)} mph`;
       descriptionDisplay.textContent = description;
       emojiDisplay.textContent = getEmoji(id);
   
@@ -202,6 +221,7 @@ function displayWeather (data) {
       dayContainer.appendChild(dateDisplay);
       dayContainer.appendChild(tempDisplay);
       dayContainer.appendChild(humidityDisplay);
+      dayContainer.appendChild(windDisplay);
       dayContainer.appendChild(descriptionDisplay);
       dayContainer.appendChild(emojiDisplay);
   
@@ -212,10 +232,7 @@ function displayWeather (data) {
   //5 day forecast should display in the "forecast" section. IT should display
   //12pm local time forecast for each day starting with today
   
-
-
-  
- 
+//emoji function to display based on the weather id type.  
 
 function getEmoji (weatherId) {
   switch(true) {
