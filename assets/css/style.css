@@ -35,7 +35,7 @@ p {
 /*styles the card that holds the weather data */
 .card {
     background: linear-gradient(180deg, rgb(112, 170, 229), rgb(235, 181, 80) );
-    padding: 20px;
+    padding: 10px;
     box-shadow: 2px 2px 5px hsla (black);
     max-width: 1000px;
     margin: 10px;
@@ -79,6 +79,7 @@ p {
     box-shadow: 2px 2px 5px hsla (black);
     min-width: 100px; /* Adjust this value as needed */
   }
+  
 
 .weatherForm {
     margin: 5px;
@@ -102,7 +103,7 @@ button[type = "submit"] {
     padding: 10px 20px;
     font-weight: bold;
     font-size: 2rem;
-    background-color: rgb(183, 157, 227);
+    background-color: darkblue;
     color: white;
     border: none;
     border-radius: 5px;
@@ -110,7 +111,7 @@ button[type = "submit"] {
 }
 /* slightly chages the color of the button upon hovering */
 button[type="submit"]:hover {
-    background-color: rgb(168, 239, 168);
+    background-color: black;
 }
 /* sets all of the text to bold for the all of the weather data, except the emoji */
 .tempDisplay, .humidityDisplay, .descriptionDisplay, .errorDisplay {
